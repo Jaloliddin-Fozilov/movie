@@ -1,7 +1,9 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import './home_page.dart';
+import './top_menu_navigator.dart';
+import './profile_screen.dart';
+import './favorites_screen.dart';
 
 class TabsScreen extends StatefulWidget {
   const TabsScreen({Key? key}) : super(key: key);
@@ -11,38 +13,59 @@ class TabsScreen extends StatefulWidget {
 }
 
 class _TabsScreenState extends State<TabsScreen> {
+  var _tabIndex = 0;
+  List<Map<String, dynamic>> _pages = [];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _pages = [
+      {'page': HomePage(), 'title': "Home"},
+      {'page': FavoritesScreen(), 'title': "Favorites"},
+      {'page': ProfileScreen(), 'title': "Profile"},
+    ];
+  }
+
+  void _changeTab(int index) {
+    setState(() {
+      _tabIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 4,
-      child: Scaffold(
-        appBar: AppBar(
-          title: TabBar(
-            indicatorColor: Colors.transparent,
-            labelPadding: EdgeInsets.all(0),
-            labelStyle: TextStyle(fontSize: 12),
-            tabs: [
-              Tab(
-                icon: Icon(Icons.search),
-              ),
-              Tab(
-                text: "My List",
-              ),
-              Tab(
-                text: "TV Shows",
-              ),
-              Tab(
-                text: "Movies",
-              ),
-            ],
-          ),
+    return Scaffold(
+      body: Column(children: [
+        TopMenuNavigator(
+          tabIndex: _tabIndex,
+          changeTab: _changeTab,
         ),
-        body: TabBarView(
-          children: [
-            HomePage(),
-            HomePage(),
-            HomePage(),
-            HomePage(),
+        _pages[_tabIndex]['page'],
+      ]),
+      bottomNavigationBar: new Theme(
+        data: Theme.of(context).copyWith(
+          canvasColor: Color.fromRGBO(20, 24, 33, 1),
+        ),
+        child: new BottomNavigationBar(
+          unselectedItemColor: Colors.grey[700],
+          selectedItemColor: Colors.blue,
+          type: BottomNavigationBarType.shifting,
+          currentIndex: _tabIndex,
+          onTap: _changeTab,
+          items: const [
+            BottomNavigationBarItem(
+              icon: const Icon(Icons.home),
+              label: "Home",
+            ),
+            BottomNavigationBarItem(
+              icon: const Icon(Icons.favorite),
+              label: "Favorites",
+            ),
+            BottomNavigationBarItem(
+              icon: const Icon(Icons.person),
+              label: "Profile",
+            ),
           ],
         ),
       ),

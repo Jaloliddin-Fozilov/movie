@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 
-import './Screens/home_page.dart';
-import './Screens/tabs_screen.dart';
+import './screens/home_page.dart';
+import './screens/tabs_screen.dart';
+import 'screens/top_menu_navigator.dart';
 
 void main() {
   runApp(MyMovieApp());
@@ -20,16 +21,15 @@ class MyMovieApp extends StatelessWidget {
         fontFamily: GoogleFonts.merriweather().fontFamily,
         primaryColor: Colors.grey[900],
         scaffoldBackgroundColor: Colors.grey[900],
-        appBarTheme: AppBarTheme(
-          backgroundColor: Colors.grey[900],
-        ),
         textTheme: const TextTheme(
           bodyText2: TextStyle(
             color: Colors.white,
           ),
         ),
       ),
-      home: TabsScreen(),
+      home: SafeArea(
+        child: TabsScreen(),
+      ),
     );
   }
 }
