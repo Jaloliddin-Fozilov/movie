@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import './home_page.dart';
@@ -17,6 +18,9 @@ class _TabsScreenState extends State<TabsScreen> {
       child: Scaffold(
         appBar: AppBar(
           title: TabBar(
+            indicatorColor: Colors.transparent,
+            labelPadding: EdgeInsets.all(0),
+            labelStyle: TextStyle(fontSize: 12),
             tabs: [
               Tab(
                 icon: Icon(Icons.search),

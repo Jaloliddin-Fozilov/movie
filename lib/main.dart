@@ -18,6 +18,11 @@ class MyMovieApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         fontFamily: GoogleFonts.merriweather().fontFamily,
+        primaryColor: Colors.grey[900],
+        scaffoldBackgroundColor: Colors.grey[900],
+        appBarTheme: AppBarTheme(
+          backgroundColor: Colors.grey[900],
+        ),
         textTheme: const TextTheme(
           bodyText2: TextStyle(
             color: Colors.white,
