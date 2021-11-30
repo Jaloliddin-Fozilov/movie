@@ -5,8 +5,14 @@ import './top_menu_navigator.dart';
 import './profile_screen.dart';
 import './favorites_screen.dart';
 
+import '../models/categories_model.dart';
+
 class TabsScreen extends StatefulWidget {
-  const TabsScreen({Key? key}) : super(key: key);
+  final List<CategoryModel> categoryModel;
+  const TabsScreen({
+    Key? key,
+    required this.categoryModel,
+  }) : super(key: key);
 
   @override
   _TabsScreenState createState() => _TabsScreenState();
@@ -21,7 +27,7 @@ class _TabsScreenState extends State<TabsScreen> {
     // TODO: implement initState
     super.initState();
     _pages = [
-      {'page': HomePage(), 'title': "Home"},
+      {'page': HomePage(categoryModel: widget.categoryModel), 'title': "Home"},
       {'page': FavoritesScreen(), 'title': "Favorites"},
       {'page': ProfileScreen(), 'title': "Profile"},
     ];
