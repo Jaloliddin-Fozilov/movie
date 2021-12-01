@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
-import 'package:movie/Screens/tabs_screen.dart';
 
-import './Screens/home_page.dart';
-import './Screens/tabs_screen.dart';
-import 'Screens/top_menu_navigator.dart';
+import './screen/home_page.dart';
+import './screen/tabs_screen.dart';
+import 'screen/top_menu_navigator.dart';
 
 import './models/categories_model.dart';
+import './models/movies_model.dart';
 
 void main() {
   runApp(MyMovieApp());
@@ -19,6 +19,7 @@ class MyMovieApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _categoryModel = Categories();
+    final _movies = Movies();
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
@@ -34,6 +35,7 @@ class MyMovieApp extends StatelessWidget {
       home: SafeArea(
         child: TabsScreen(
           categoryModel: _categoryModel.list,
+          movies: _movies.list,
         ),
       ),
     );

@@ -4,8 +4,9 @@ class MoviesModel {
   final String title;
   final List<String> imageUrls;
   final List<String> actors;
+  final String director;
   final String description;
-  final int star;
+  final double rating;
 
   MoviesModel({
     required this.id,
@@ -13,8 +14,9 @@ class MoviesModel {
     required this.title,
     required this.imageUrls,
     required this.actors,
+    required this.director,
     required this.description,
-    required this.star,
+    required this.rating,
   });
 }
 
@@ -30,9 +32,10 @@ class Movies {
         "https://i.ytimg.com/vi/INlFMT09hlI/maxresdefault.jpg",
       ],
       actors: ["a1", "a2", "a3", "a4"],
+      director: "Aanand L. Rai",
       description:
           "Zero is a 2018 Indian romantic comedy-drama film written by Himanshu Sharma, directed by Aanand L. Rai and produced by Colour Yellow Productions in collaboration with Red Chillies Entertainment. Starring Shah Rukh Khan, Katrina Kaif and Anushka Sharma in leading roles, Zero revolves around the most prominent character Bauua Singh, a short man from Meerut who after having difficulty finding a marriage partner, finds a companion in Aafia Bhinder, a NSAR (a fictional space research facility) scientist with cerebral palsy. However, film superstar Babita also gets close with him, testing his first relationship, before this love triangle takes them to far-off cities, thrusting Bauua into an adventure to discover both his true love and completeness in a life lived to the fullest.",
-      star: 4,
+      rating: 4,
     ),
     MoviesModel(
       id: "m2",
@@ -44,9 +47,10 @@ class Movies {
         "https://images.mygoodtimes.in/wp-content/uploads/2019/09/12130834/Barfi-e1568293729597.jpg",
       ],
       actors: ["a1", "a2", "a3", "a4"],
+      director: "Anurag Basu",
       description:
           "Barfi! is a 2012 Indian Hindi-language romantic comedy-drama film written and directed by Anurag Basu and produced by Ronnie Screwvala and Siddharth Roy Kapur under UTV Motion Pictures. Set in the 1970s, the film depicts the story of Murphy 'Barfi' Johnson (a deaf-mute boy from Darjeeling) and his relationships with two women, Shruti and Jhilmil (who is autistic). The film stars Ranbir Kapoor, Priyanka Chopra, and Ileana D'Cruz in the lead roles, with Saurabh Shukla, Ashish Vidyarthi, Jisshu Sengupta and Roopa Ganguly in supporting roles.",
-      star: 5,
+      rating: 5,
     ),
     MoviesModel(
       id: "m3",
@@ -58,9 +62,10 @@ class Movies {
         "https://avatars.mds.yandex.net/get-kinopoisk-image/1900788/20ac3546-359b-44bd-85d6-27e9ce7ac3da/2560x",
       ],
       actors: ["a1", "a2", "a3", "a4"],
+      director: "Sanjay Leela Bhansali",
       description:
           "Devdas is a Bengali-language film based on the Sharat Chandra Chattopadhyay novel Devdas. It is the first Bangladeshi version of the story and the first colour film version in Bangladesh. It was the first of two versions directed by Chashi Nazrul Islam.",
-      star: 45,
+      rating: 45,
     ),
     MoviesModel(
       id: "m4",
@@ -71,9 +76,10 @@ class Movies {
         "https://www.themoviedb.org/t/p/w533_and_h300_bestv2/xuqgovav0bbzwxzSg9K0RcEzLPj.jpg",
       ],
       actors: ["a1", "a2", "a3", "a4"],
+      director: "Karan Johar",
       description:
           "Rizwan Khan, a Muslim from the Borivali section of Mumbai, has Asperger's syndrome. He marries a Hindu single mother, Mandira, in San Francisco. After 9/11, Rizwan is detained by authorities at LAX who treat him as a terrorist because of his condition and his race.",
-      star: 3,
+      rating: 3,
     ),
     MoviesModel(
       id: "m5",
@@ -85,9 +91,10 @@ class Movies {
         "https://www.themoviedb.org/t/p/w533_and_h300_bestv2/f5F4cRhQdUbyVbB5lTNCwUzD6BP.jpg",
       ],
       actors: ["a5", "a6", "a7"],
+      director: "Karan Johar",
       description:
           "During the 1980s, a failed stand-up comedian is driven insane and turns to a life of crime and chaos in Gotham City while becoming an infamous psychopathic crime figure.",
-      star: 5,
+      rating: 5,
     ),
     MoviesModel(
       id: "m6",
@@ -99,9 +106,10 @@ class Movies {
         "https://www.themoviedb.org/t/p/w533_and_h300_bestv2/oRiUKwDpcqDdoLwPoA4FIRh3hqY.jpg",
       ],
       actors: ["a5", "a6", "a7"],
+      director: "Quentin Tarantino",
       description:
           "Los Angeles, 1969. TV star Rick Dalton, a struggling actor specializing in westerns, and stuntman Cliff Booth, his best friend, try to survive in a constantly changing movie industry. Dalton is the neighbor of the young and promising actress and model Sharon Tate, who has just married the prestigious Polish director Roman Polanski…",
-      star: 4,
+      rating: 4,
     ),
     MoviesModel(
       id: "m7",
@@ -113,9 +121,10 @@ class Movies {
         "https://www.themoviedb.org/t/p/w533_and_h300_bestv2/cjytKnwXW8Gy1HA6Ejwso4FmPSv.jpg",
       ],
       actors: ["a5", "a6", "a7"],
+      director: "James Gray",
       description:
           "The near future, a time when both hope and hardships drive humanity to look to the stars and beyond. While a mysterious phenomenon menaces to destroy life on planet Earth, astronaut Roy McBride undertakes a mission across the immensity of space and its many perils to uncover the truth about a lost expedition that decades before boldly faced emptiness and silence in search of the unknown.",
-      star: 3,
+      rating: 3,
     ),
     MoviesModel(
       id: "m8",
@@ -127,8 +136,9 @@ class Movies {
         "https://tasix.online/uploads/posts/2020-05/thumbs/1588930056_img_4702-xl1.jpg",
       ],
       actors: ["a8", "a9", "a10", "a11"],
+      director: "Jahongir Ahmedov",
       description: "Uzbek film",
-      star: 5,
+      rating: 5,
     ),
     MoviesModel(
       id: "m9",
@@ -139,8 +149,9 @@ class Movies {
         "https://i.ytimg.com/vi/uCL9l0oeW04/maxresdefault.jpg",
       ],
       actors: ["a8", "a9", "a10", "a11"],
+      director: "Nodir Muminov",
       description: "Uzbek film",
-      star: 4,
+      rating: 4,
     ),
     MoviesModel(
       id: "m10",
@@ -152,8 +163,9 @@ class Movies {
         "https://vdp.mycdn.me/getImage?id=343454583393&idx=14&thumbType=32",
       ],
       actors: ["a8", "a9", "a10", "a11"],
+      director: "Rustam Sadiev",
       description: "Uzbek film",
-      star: 4,
+      rating: 4,
     ),
   ];
 
