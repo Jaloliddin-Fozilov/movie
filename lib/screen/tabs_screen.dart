@@ -41,7 +41,12 @@ class _TabsScreenState extends State<TabsScreen> {
       },
       {'page': FavoritesScreen(), 'title': "Favorites"},
       {'page': ProfileScreen(), 'title': "Profile"},
-      {'page': CategoryMoviesScreen(), 'title': "Movies"},
+      {
+        'page': CategoryMoviesScreen(
+          movies: widget.movies,
+        ),
+        'title': "Movies"
+      },
     ];
   }
 
