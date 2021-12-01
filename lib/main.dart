@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import './screen/home_page.dart';
 import './screen/tabs_screen.dart';
 import 'screen/top_menu_navigator.dart';
+import './screen/category_movies_screen.dart';
 
 import './models/categories_model.dart';
 import './models/movies_model.dart';

@@ -4,6 +4,7 @@ import './home_page.dart';
 import './top_menu_navigator.dart';
 import './profile_screen.dart';
 import './favorites_screen.dart';
+import 'category_movies_screen.dart';
 
 import '../models/categories_model.dart';
 import '../models/movies_model.dart';
@@ -34,15 +35,17 @@ class _TabsScreenState extends State<TabsScreen> {
         'page': HomePage(
           categoryModel: widget.categoryModel,
           movies: widget.movies,
+          changeTab: changeTab,
         ),
         'title': "Home"
       },
       {'page': FavoritesScreen(), 'title': "Favorites"},
       {'page': ProfileScreen(), 'title': "Profile"},
+      {'page': CategoryMoviesScreen(), 'title': "Movies"},
     ];
   }
 
-  void _changeTab(int index) {
+  void changeTab(int index) {
     setState(() {
       _tabIndex = index;
     });
@@ -54,7 +57,7 @@ class _TabsScreenState extends State<TabsScreen> {
       body: Column(children: [
         TopMenuNavigator(
           tabIndex: _tabIndex,
-          changeTab: _changeTab,
+          changeTab: changeTab,
         ),
         _pages[_tabIndex]['page'],
       ]),
@@ -66,8 +69,8 @@ class _TabsScreenState extends State<TabsScreen> {
           unselectedItemColor: Colors.grey[700],
           selectedItemColor: Colors.blue,
           type: BottomNavigationBarType.shifting,
-          currentIndex: _tabIndex,
-          onTap: _changeTab,
+          currentIndex: _tabIndex > 2 ? 0 : _tabIndex,
+          onTap: changeTab,
           items: const [
             BottomNavigationBarItem(
               icon: const Icon(Icons.home),

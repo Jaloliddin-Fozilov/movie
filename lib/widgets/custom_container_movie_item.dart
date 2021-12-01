@@ -1,90 +1,55 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import '../screen/home_page.dart';
+import 'package:movie/models/movies_model.dart';
+import 'package:movie/widgets/home_movie_items.dart';
 
 class CustomContainerMovieItem extends StatelessWidget {
-  final String image;
-  final String title;
-  final String director;
-  final double rating;
+  final String categoryTitle;
+  final Function changeTab;
+  final List<MoviesModel> movies;
   const CustomContainerMovieItem({
     Key? key,
-    required this.image,
-    required this.title,
-    required this.director,
-    required this.rating,
+    required this.categoryTitle,
+    required this.changeTab,
+    required this.movies,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var index = 0;
     return Column(
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text("$title"),
-            TextButton(
-              onPressed: () {},
-              child: Text("See all"),
-            ),
-          ],
+        Container(
+          padding: EdgeInsets.only(right: 24),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text("${categoryTitle}"),
+              TextButton(
+                onPressed: () => changeTab(3),
+                child: Text("See all"),
+              ),
+            ],
+          ),
         ),
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(
             children: [
-              Container(
-                width: 100,
-                height: 200,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(5),
-                      child: Image.network(
-                        "$image",
-                        height: 110,
-                        width: 100,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Text(
-                      "$title",
-                      style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    Text(
-                      "$director",
-                      style: TextStyle(
-                        color: Colors.grey,
-                        fontSize: 10,
-                      ),
-                    ),
-                    RatingBarIndicator(
-                      rating: rating,
-                      itemBuilder: (context, index) => Icon(
-                        Icons.star,
-                        color: Colors.lightBlue,
-                      ),
-                      itemPadding: EdgeInsets.only(right: 4, top: 5),
-                      itemCount: 5,
-                      itemSize: 15.0,
-                    ),
-                  ],
-                ),
-              )
+              Row(
+                children: movies.map((movie) {
+                  final moviesItem = movies
+                      .where((movies) => movie.categoryId == movies.categoryId)
+                      .toList();
+
+                  return HomeMovieItems(
+                    image: moviesItem[index].imageUrls[0],
+                    title: moviesItem[index].title,
+                    director: moviesItem[index].director,
+                    rating: moviesItem[index].rating,
+                  );
+                }).toList(),
+              ),
             ],
           ),
         )

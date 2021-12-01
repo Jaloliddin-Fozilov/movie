@@ -8,28 +8,31 @@ import '../widgets/custom_container_movie_item.dart';
 class HomePage extends StatelessWidget {
   final List<CategoryModel> categoryModel;
   final List<MoviesModel> movies;
+  final Function changeTab;
   const HomePage({
     Key? key,
     required this.categoryModel,
     required this.movies,
+    required this.changeTab,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24),
+          padding: const EdgeInsets.only(left: 24),
           child: Column(
-            children: categoryModel
-                .map(
-                  (categoryModel) => CustomContainerMovieItem(
-                    image: "${movies[0].imageUrls[0]}",
-                    title: "${movies[0].title}",
-                    director: "${movies[0].director}",
-                    rating: movies[0].rating,
-                  ),
-                )
-                .toList(),
+            children: categoryModel.map((categoryModel) {
+              final categoryMovies = movies
+                  .where((movies) => movies.categoryId == categoryModel.id)
+                  .toList();
+
+              return CustomContainerMovieItem(
+                categoryTitle: categoryModel.title,
+                movies: categoryMovies,
+                changeTab: changeTab,
+              );
+            }).toList(),
           ),
         ),
       ),
