@@ -38,15 +38,11 @@ class CustomContainerMovieItem extends StatelessWidget {
             children: [
               Row(
                 children: movies.map((movie) {
-                  final moviesItem = movies
-                      .where((movies) => movie.categoryId == movies.categoryId)
-                      .toList();
+                  final moviesItem =
+                      movies.where((movies) => movie.id == movies.id).toList();
 
                   return HomeMovieItems(
-                    image: moviesItem[index].imageUrls[0],
-                    title: moviesItem[index].title,
-                    director: moviesItem[index].director,
-                    rating: moviesItem[index].rating,
+                    moviesItem: moviesItem,
                   );
                 }).toList(),
               ),
@@ -57,3 +53,9 @@ class CustomContainerMovieItem extends StatelessWidget {
     );
   }
 }
+/*
+image: moviesItem[index].imageUrls[0],
+                    title: moviesItem[index].title,
+                    director: moviesItem[index].director,
+                    rating: moviesItem[index].rating,
+                    */

@@ -1,19 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
+import 'package:movie/models/movies_model.dart';
+
 import '../screen/category_movies_screen.dart';
 
 class HomeMovieItems extends StatelessWidget {
-  final String image;
-  final String title;
-  final String director;
-  final double rating;
+  final List<MoviesModel> moviesItem;
   const HomeMovieItems({
     Key? key,
-    required this.image,
-    required this.title,
-    required this.director,
-    required this.rating,
+    required this.moviesItem,
   }) : super(key: key);
 
   @override
@@ -28,7 +24,7 @@ class HomeMovieItems extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.circular(5),
             child: Image.network(
-              "$image",
+              "${moviesItem[0].imageUrls[0]}",
               height: 110,
               width: 100,
               fit: BoxFit.cover,
@@ -38,7 +34,7 @@ class HomeMovieItems extends StatelessWidget {
             height: 10,
           ),
           Text(
-            "$title",
+            "${moviesItem[0].title}",
             style: TextStyle(
               fontSize: 12,
               fontWeight: FontWeight.bold,
@@ -48,14 +44,14 @@ class HomeMovieItems extends StatelessWidget {
             height: 5,
           ),
           Text(
-            "$director",
+            "${moviesItem[0].director}",
             style: TextStyle(
               color: Colors.grey,
               fontSize: 10,
             ),
           ),
           RatingBarIndicator(
-            rating: rating,
+            rating: moviesItem[0].rating,
             itemBuilder: (context, index) => Icon(
               Icons.star,
               color: Colors.lightBlue,

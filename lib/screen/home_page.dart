@@ -22,17 +22,22 @@ class HomePage extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.only(left: 24),
           child: Column(
-            children: categoryModel.map((categoryModel) {
-              final categoryMovies = movies
-                  .where((movies) => movies.categoryId == categoryModel.id)
-                  .toList();
+            children: [
+              Image.network(movies[movies.length - 1].imageUrls[1]),
+              Column(
+                children: categoryModel.map((categoryModel) {
+                  final categoryMovies = movies
+                      .where((movies) => movies.categoryId == categoryModel.id)
+                      .toList();
 
-              return CustomContainerMovieItem(
-                categoryTitle: categoryModel.title,
-                movies: categoryMovies,
-                changeTab: changeTab,
-              );
-            }).toList(),
+                  return CustomContainerMovieItem(
+                    categoryTitle: categoryModel.title,
+                    movies: categoryMovies,
+                    changeTab: changeTab,
+                  );
+                }).toList(),
+              ),
+            ],
           ),
         ),
       ),
