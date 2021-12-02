@@ -24,24 +24,24 @@ class TabsScreen extends StatefulWidget {
 
 class _TabsScreenState extends State<TabsScreen> {
   var _tabIndex = 0;
-  var categoryScreenId = "c1";
+  var categoryScreenId = "c2";
   List<Map<String, dynamic>> _pages = [];
   void categoryId(String id) {
     setState(() {
-      print("$id --------------------------------");
       categoryScreenId = id;
+    });
+  }
 
-      print("$categoryScreenId +++++++++++++++++++++++++++++++++++++");
+  void changeTab(int index) {
+    setState(() {
+      _tabIndex = index;
     });
   }
 
   @override
-  void initState() {
-    setState(() {});
-    // TODO: implement initState
-    super.initState();
+  Widget build(BuildContext context) {
     setState(() {
-      print("$categoryScreenId *************************************");
+      categoryId;
       _pages = [
         {
           'page': HomePage(
@@ -63,16 +63,6 @@ class _TabsScreenState extends State<TabsScreen> {
         },
       ];
     });
-  }
-
-  void changeTab(int index) {
-    setState(() {
-      _tabIndex = index;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
     return Scaffold(
       body: Column(children: [
         TopMenuNavigator(
