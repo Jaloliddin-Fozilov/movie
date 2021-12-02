@@ -9,6 +9,7 @@ class HomePage extends StatelessWidget {
   final List<CategoryModel> categoryModel;
   final List<MoviesModel> movies;
   final Function changeTab;
+
   const HomePage({
     Key? key,
     required this.categoryModel,

@@ -11,7 +11,7 @@ import './models/categories_model.dart';
 import './models/movies_model.dart';
 
 void main() {
-  runApp(MyMovieApp());
+  runApp(const MyMovieApp());
 }
 
 class MyMovieApp extends StatelessWidget {

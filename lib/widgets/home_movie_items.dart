@@ -7,6 +7,7 @@ import '../screen/category_movies_screen.dart';
 
 class HomeMovieItems extends StatelessWidget {
   final List<MoviesModel> moviesItem;
+
   const HomeMovieItems({
     Key? key,
     required this.moviesItem,

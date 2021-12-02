@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:movie/models/movies_model.dart';
 import 'package:movie/widgets/home_movie_items.dart';
+import '../screen/category_movies_screen.dart';
 
 class CustomContainerMovieItem extends StatelessWidget {
   final String categoryTitle;
@@ -16,18 +17,22 @@ class CustomContainerMovieItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var index = 0;
     return Column(
       children: [
         Container(
-          padding: EdgeInsets.only(right: 24),
+          padding: const EdgeInsets.only(right: 24),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text("${categoryTitle}"),
+              Text(categoryTitle),
               TextButton(
-                onPressed: () => changeTab(3),
-                child: Text("See all"),
+                onPressed: () {
+                  CategoryMoviesScreen(
+                    movies: movies,
+                  );
+                  changeTab(3);
+                },
+                child: const Text("See all"),
               ),
             ],
           ),
@@ -38,9 +43,11 @@ class CustomContainerMovieItem extends StatelessWidget {
             children: [
               Row(
                 children: movies.map((movie) {
-                  final moviesItem =
-                      movies.where((movies) => movie.id == movies.id).toList();
-
+                  final moviesItem = movies
+                      .where(
+                        (movies) => movies.id == movie.id,
+                      )
+                      .toList();
                   return HomeMovieItems(
                     moviesItem: moviesItem,
                   );
@@ -48,14 +55,8 @@ class CustomContainerMovieItem extends StatelessWidget {
               ),
             ],
           ),
-        )
+        ),
       ],
     );
   }
 }
-/*
-image: moviesItem[index].imageUrls[0],
-                    title: moviesItem[index].title,
-                    director: moviesItem[index].director,
-                    rating: moviesItem[index].rating,
-                    */
