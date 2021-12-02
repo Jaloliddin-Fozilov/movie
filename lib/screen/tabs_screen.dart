@@ -24,25 +24,45 @@ class TabsScreen extends StatefulWidget {
 
 class _TabsScreenState extends State<TabsScreen> {
   var _tabIndex = 0;
+  var categoryScreenId = "c1";
   List<Map<String, dynamic>> _pages = [];
+  void categoryId(String id) {
+    setState(() {
+      print("$id --------------------------------");
+      categoryScreenId = id;
+
+      print("$categoryScreenId +++++++++++++++++++++++++++++++++++++");
+    });
+  }
 
   @override
   void initState() {
+    setState(() {});
     // TODO: implement initState
     super.initState();
-    _pages = [
-      {
-        'page': HomePage(
-          categoryModel: widget.categoryModel,
-          movies: widget.movies,
-          changeTab: changeTab,
-        ),
-        'title': "Home"
-      },
-      {'page': FavoritesScreen(), 'title': "Favorites"},
-      {'page': ProfileScreen(), 'title': "Profile"},
-      {'page': CategoryMoviesScreen(), 'title': "Movies"},
-    ];
+    setState(() {
+      print("$categoryScreenId *************************************");
+      _pages = [
+        {
+          'page': HomePage(
+            categoryModel: widget.categoryModel,
+            movies: widget.movies,
+            changeTab: changeTab,
+            categoryId: categoryId,
+          ),
+          'title': "Home"
+        },
+        {'page': FavoritesScreen(), 'title': "Favorites"},
+        {'page': ProfileScreen(), 'title': "Profile"},
+        {
+          'page': CategoryMoviesScreen(
+            movies: widget.movies,
+            categoryId: categoryScreenId,
+          ),
+          'title': "Movies"
+        },
+      ];
+    });
   }
 
   void changeTab(int index) {

@@ -8,11 +8,13 @@ class CustomContainerMovieItem extends StatelessWidget {
   final String categoryTitle;
   final Function changeTab;
   final List<MoviesModel> movies;
+  final Function categoryId;
   const CustomContainerMovieItem({
     Key? key,
     required this.categoryTitle,
     required this.changeTab,
     required this.movies,
+    required this.categoryId,
   }) : super(key: key);
 
   @override
@@ -30,6 +32,7 @@ class CustomContainerMovieItem extends StatelessWidget {
                   CategoryMoviesScreen(
                     movies: movies,
                   );
+                  categoryId(movies[0].categoryId);
                   changeTab(3);
                 },
                 child: const Text("See all"),
