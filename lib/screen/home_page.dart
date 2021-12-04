@@ -25,7 +25,45 @@ class HomePage extends StatelessWidget {
           padding: const EdgeInsets.only(left: 24),
           child: Column(
             children: [
-              Image.network(movies[movies.length - 1].imageUrls[1]),
+              Stack(
+                alignment: Alignment.bottomRight,
+                children: [
+                  Container(
+                    margin: EdgeInsets.only(
+                      bottom: 20,
+                      right: 24,
+                    ),
+                    height: 180,
+                    width: double.infinity,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: Image.network(
+                        movies[movies.length - 1].imageUrls[1],
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(
+                      right: 40,
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(50),
+                      child: Container(
+                        color: Colors.blue,
+                        child: IconButton(
+                          iconSize: 36,
+                          onPressed: () {},
+                          icon: Icon(
+                            Icons.play_arrow,
+                          ),
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
               Column(
                 children: categoryModel.map((categoryModel) {
                   final categoryMovies = movies
