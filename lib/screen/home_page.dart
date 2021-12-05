@@ -10,12 +10,14 @@ class HomePage extends StatelessWidget {
   final List<MoviesModel> movies;
   final Function changeTab;
   final Function categoryId;
+  final Function detailPage;
   const HomePage({
     Key? key,
     required this.categoryModel,
     required this.movies,
     required this.changeTab,
     required this.categoryId,
+    required this.detailPage,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -75,6 +77,7 @@ class HomePage extends StatelessWidget {
                     movies: categoryMovies,
                     changeTab: changeTab,
                     categoryId: categoryId,
+                    detailPage: detailPage,
                   );
                 }).toList(),
               ),

@@ -9,12 +9,14 @@ class CustomContainerMovieItem extends StatelessWidget {
   final Function changeTab;
   final List<MoviesModel> movies;
   final Function categoryId;
+  final Function detailPage;
   const CustomContainerMovieItem({
     Key? key,
     required this.categoryTitle,
     required this.changeTab,
     required this.movies,
     required this.categoryId,
+    required this.detailPage,
   }) : super(key: key);
 
   @override
@@ -31,8 +33,9 @@ class CustomContainerMovieItem extends StatelessWidget {
                 onPressed: () {
                   CategoryMoviesScreen(
                     movies: movies,
+                    detailPage: detailPage,
                   );
-                  categoryId(movies[0].categoryId);
+                  categoryId(movies[0].categoryId, categoryTitle);
                   changeTab(3);
                 },
                 child: const Text("See all"),
@@ -45,14 +48,11 @@ class CustomContainerMovieItem extends StatelessWidget {
           child: Row(
             children: [
               Row(
-                children: movies.map((movie) {
-                  final moviesItem = movies
-                      .where(
-                        (movies) => movies.id == movie.id,
-                      )
-                      .toList();
+                children: movies.map((moviesItem) {
                   return HomeMovieItems(
                     moviesItem: moviesItem,
+                    changeTab: changeTab,
+                    detailPage: detailPage,
                   );
                 }).toList(),
               ),

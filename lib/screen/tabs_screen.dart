@@ -5,6 +5,7 @@ import './top_menu_navigator.dart';
 import './profile_screen.dart';
 import './favorites_screen.dart';
 import 'category_movies_screen.dart';
+import 'package:movie/screen/movie_datail_screen.dart';
 
 import '../models/categories_model.dart';
 import '../models/movies_model.dart';
@@ -25,16 +26,39 @@ class TabsScreen extends StatefulWidget {
 class _TabsScreenState extends State<TabsScreen> {
   var _tabIndex = 0;
   var categoryScreenId = "c2";
+  var categoryScreenTitle = "c2";
+  String title = "";
+  List imageUrls = [];
+  String description = "";
+  String director = "";
+  List actors = [];
   List<Map<String, dynamic>> _pages = [];
-  void categoryId(String id) {
+  void categoryId(String id, String title) {
     setState(() {
       categoryScreenId = id;
+      categoryScreenTitle = title;
     });
   }
 
   void changeTab(int index) {
     setState(() {
       _tabIndex = index;
+    });
+  }
+
+  void detailPage(
+    String detailTitle,
+    List detailImageUrls,
+    String detailDescription,
+    String detailDirector,
+    List detailActors,
+  ) {
+    setState(() {
+      title = detailTitle;
+      imageUrls = detailImageUrls;
+      description = detailDescription;
+      director = detailDirector;
+      actors = detailActors;
     });
   }
 
@@ -49,6 +73,7 @@ class _TabsScreenState extends State<TabsScreen> {
             movies: widget.movies,
             changeTab: changeTab,
             categoryId: categoryId,
+            detailPage: detailPage,
           ),
           'title': "Home"
         },
@@ -58,8 +83,20 @@ class _TabsScreenState extends State<TabsScreen> {
           'page': CategoryMoviesScreen(
             movies: widget.movies,
             categoryId: categoryScreenId,
+            categoryTitleCaegotyScreen: categoryScreenTitle,
+            detailPage: detailPage,
           ),
           'title': "Movies"
+        },
+        {
+          'page': MovieDetailScreen(
+            title: title,
+            imageUrls: imageUrls,
+            description: description,
+            director: director,
+            actors: actors,
+          ),
+          'title': "Movie",
         },
       ];
     });
