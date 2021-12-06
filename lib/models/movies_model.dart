@@ -99,7 +99,7 @@ class Movies {
     MoviesModel(
       id: "m6",
       categoryId: "c2",
-      title: "Once Upon a Time… in Hollywood ",
+      title: "Once Upon a Time…",
       imageUrls: [
         "https://www.themoviedb.org/t/p/w220_and_h330_face/8j58iEBw9pOXFD2L0nt0ZXeHviB.jpg",
         "https://www.themoviedb.org/t/p/w533_and_h300_bestv2/hj59t2wo5sYdPW3OSONMHYmAz09.jpg",
