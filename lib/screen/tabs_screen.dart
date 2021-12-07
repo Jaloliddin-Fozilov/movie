@@ -27,12 +27,25 @@ class _TabsScreenState extends State<TabsScreen> {
   var _tabIndex = 0;
   var categoryScreenId = "c2";
   var categoryScreenTitle = "c2";
+  String movieId = "";
   String title = "";
   List imageUrls = [];
   String description = "";
   String director = "";
   List actors = [];
+  final moviesModel = Movies();
   List<Map<String, dynamic>> _pages = [];
+
+  void _toggleLike(String movieId) {
+    setState(() {
+      moviesModel.toggleLike(movieId);
+    });
+  }
+
+  bool _isFavorite(String moviesId) {
+    return moviesModel.favorites.any((movie) => movie.id == moviesId);
+  }
+
   void categoryId(String id, String title) {
     setState(() {
       categoryScreenId = id;
@@ -47,6 +60,7 @@ class _TabsScreenState extends State<TabsScreen> {
   }
 
   void detailPage(
+    String detailId,
     String detailTitle,
     List detailImageUrls,
     String detailDescription,
@@ -54,6 +68,7 @@ class _TabsScreenState extends State<TabsScreen> {
     List detailActors,
   ) {
     setState(() {
+      movieId = detailId;
       title = detailTitle;
       imageUrls = detailImageUrls;
       description = detailDescription;
@@ -77,7 +92,12 @@ class _TabsScreenState extends State<TabsScreen> {
           ),
           'title': "Home"
         },
-        {'page': FavoritesScreen(), 'title': "Favorites"},
+        {
+          'page': FavoritesScreen(
+            movies: moviesModel.favorites,
+          ),
+          'title': "Favorites"
+        },
         {'page': ProfileScreen(), 'title': "Profile"},
         {
           'page': CategoryMoviesScreen(
@@ -90,11 +110,14 @@ class _TabsScreenState extends State<TabsScreen> {
         },
         {
           'page': MovieDetailScreen(
+            id: movieId,
             title: title,
             imageUrls: imageUrls,
             description: description,
             director: director,
             actors: actors,
+            toggleLike: _toggleLike,
+            isFavorite: _isFavorite,
           ),
           'title': "Movie",
         },

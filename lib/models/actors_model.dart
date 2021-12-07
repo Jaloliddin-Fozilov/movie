@@ -57,8 +57,7 @@ class Actors {
     ActorsModel(
       id: "a8",
       name: "Dilorom Karimova",
-      image:
-          "http://cdn.beta.qalampir.uz/uploads/wQ/f_VuMP6fbt5D4qwId8Nk2YQ4LbreUUxH.jpg",
+      image: "https://www.kino-teatr.ru/acter/album/315683/pv_339514.jpg",
     ),
     ActorsModel(
       id: "a9",

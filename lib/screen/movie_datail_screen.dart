@@ -1,21 +1,28 @@
 import 'package:flutter/material.dart';
 
 import 'package:carousel_slider/carousel_slider.dart';
+import '../models/actors_model.dart';
 
 class MovieDetailScreen extends StatefulWidget {
+  final String id;
   final String title;
   final List imageUrls;
   final String description;
   final String director;
   final List actors;
+  final Function toggleLike;
+  final Function isFavorite;
 
   const MovieDetailScreen({
     Key? key,
+    required this.id,
     required this.title,
     required this.imageUrls,
     required this.description,
     required this.director,
     required this.actors,
+    required this.toggleLike,
+    required this.isFavorite,
   }) : super(key: key);
 
   @override
@@ -23,6 +30,7 @@ class MovieDetailScreen extends StatefulWidget {
 }
 
 class _MovieDetailScreenState extends State<MovieDetailScreen> {
+  List<ActorsModel> actorsList = Actors().list;
   int activeImageIndex = 0;
   late String firstText;
   late String secondText;
@@ -127,10 +135,12 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                     child: Container(
                       color: Colors.blue,
                       child: IconButton(
-                        iconSize: 36,
-                        onPressed: () {},
+                        iconSize: 24,
+                        onPressed: () => widget.toggleLike(widget.id),
                         icon: Icon(
-                          Icons.play_arrow,
+                          widget.isFavorite(widget.id)
+                              ? Icons.favorite
+                              : Icons.favorite_border_outlined,
                         ),
                         color: Colors.white,
                       ),
@@ -145,6 +155,9 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
               child: Column(
                 children: [
                   Container(
+                    padding: EdgeInsets.only(
+                      bottom: 10,
+                    ),
                     alignment: Alignment.centerLeft,
                     child: Text(
                       "Description",
@@ -204,6 +217,65 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                         style: TextStyle(
                           fontSize: 12,
                           color: Colors.grey,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        padding: EdgeInsets.symmetric(
+                          vertical: 10,
+                        ),
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          "The Cost",
+                          style: TextStyle(
+                            fontSize: 14,
+                          ),
+                        ),
+                      ),
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          children: widget.actors.map((actorsId) {
+                            final actorsItem = actorsList
+                                .where((actorsListId) =>
+                                    actorsListId.id == actorsId)
+                                .toList();
+                            return Container(
+                              height: 110,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(15),
+                                    child: Container(
+                                      margin: EdgeInsets.only(right: 5),
+                                      width: 80,
+                                      height: 80,
+                                      child: Image.network(
+                                        actorsItem[0].image,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    width: 80,
+                                    height: 30,
+                                    child: Text(
+                                      actorsItem[0].name,
+                                      style: TextStyle(
+                                        color: Colors.grey,
+                                        fontSize: 12,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            );
+                          }).toList(),
                         ),
                       ),
                     ],

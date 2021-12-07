@@ -169,7 +169,22 @@ class Movies {
     ),
   ];
 
+  List<MoviesModel> _favorites = [];
+
   List<MoviesModel> get list {
     return _list;
+  }
+
+  List<MoviesModel> get favorites {
+    return _favorites;
+  }
+
+  void toggleLike(String movieId) {
+    final movieIndex = _favorites.indexWhere((movie) => movie.id == movieId);
+    if (movieIndex < 0) {
+      _favorites.add(list.firstWhere((movie) => movie.id == movieId));
+    } else {
+      _favorites.removeWhere((movies) => movies.id == movieId);
+    }
   }
 }

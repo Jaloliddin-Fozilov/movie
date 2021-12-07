@@ -21,6 +21,7 @@ class HomeMovieItems extends StatelessWidget {
   Widget build(BuildContext context) {
     void goToDetailPage() {
       detailPage(
+        moviesItem.id,
         moviesItem.title,
         moviesItem.imageUrls,
         moviesItem.description,
