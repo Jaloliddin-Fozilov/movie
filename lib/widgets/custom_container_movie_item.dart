@@ -34,6 +34,7 @@ class CustomContainerMovieItem extends StatelessWidget {
                   CategoryMoviesScreen(
                     movies: movies,
                     detailPage: detailPage,
+                    changeTab: changeTab,
                   );
                   categoryId(movies[0].categoryId, categoryTitle);
                   changeTab(3);

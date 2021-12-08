@@ -89,12 +89,15 @@ class _TabsScreenState extends State<TabsScreen> {
             changeTab: changeTab,
             categoryId: categoryId,
             detailPage: detailPage,
+            toggleLike: _toggleLike,
+            isFavorite: _isFavorite,
           ),
           'title': "Home"
         },
         {
           'page': FavoritesScreen(
             movies: moviesModel.favorites,
+            toggleLike: _toggleLike,
           ),
           'title': "Favorites"
         },
@@ -104,6 +107,7 @@ class _TabsScreenState extends State<TabsScreen> {
             movies: widget.movies,
             categoryId: categoryScreenId,
             categoryTitleCaegotyScreen: categoryScreenTitle,
+            changeTab: changeTab,
             detailPage: detailPage,
           ),
           'title': "Movies"

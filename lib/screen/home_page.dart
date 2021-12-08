@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movie/screen/movie_datail_screen.dart';
 
 import '../models/categories_model.dart';
 import '../models/movies_model.dart';
@@ -11,6 +12,8 @@ class HomePage extends StatelessWidget {
   final Function changeTab;
   final Function categoryId;
   final Function detailPage;
+  final Function toggleLike;
+  final Function isFavorite;
   const HomePage({
     Key? key,
     required this.categoryModel,
@@ -18,9 +21,24 @@ class HomePage extends StatelessWidget {
     required this.changeTab,
     required this.categoryId,
     required this.detailPage,
+    required this.toggleLike,
+    required this.isFavorite,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    void _goToHomeItemsScreen() {
+      detailPage(
+        movies[movies.length - 1].id,
+        movies[movies.length - 1].title,
+        movies[movies.length - 1].imageUrls,
+        movies[movies.length - 1].description,
+        movies[movies.length - 1].director,
+        movies[movies.length - 1].actors,
+      );
+
+      changeTab(4);
+    }
+
     return Expanded(
       child: SingleChildScrollView(
         child: Padding(
@@ -55,7 +73,7 @@ class HomePage extends StatelessWidget {
                         color: Colors.blue,
                         child: IconButton(
                           iconSize: 36,
-                          onPressed: () {},
+                          onPressed: () => _goToHomeItemsScreen(),
                           icon: Icon(
                             Icons.play_arrow,
                           ),

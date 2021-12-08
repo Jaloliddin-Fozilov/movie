@@ -6,6 +6,7 @@ import '../widgets/home_movie_items.dart';
 class CategoryMoviesScreen extends StatelessWidget {
   final List<MoviesModel> movies;
   final String? categoryId;
+  final Function changeTab;
   final String? categoryTitleCaegotyScreen;
   final Function detailPage;
   const CategoryMoviesScreen({
@@ -13,6 +14,7 @@ class CategoryMoviesScreen extends StatelessWidget {
     required this.movies,
     this.categoryId,
     this.categoryTitleCaegotyScreen,
+    required this.changeTab,
     required this.detailPage,
   }) : super(key: key);
 
@@ -49,6 +51,7 @@ class CategoryMoviesScreen extends StatelessWidget {
                   .map((moviesItem) {
                 return HomeMovieItems(
                   moviesItem: moviesItem,
+                  changeTab: changeTab,
                   detailPage: detailPage,
                 );
               }).toList(),
@@ -59,26 +62,3 @@ class CategoryMoviesScreen extends StatelessWidget {
     );
   }
 }
-
-
-
-
-
-/*
-child: Row(
-          children: [
-            Column(
-              children: movies
-                  .where(
-                    (movie) => movie.categoryId == categoryId,
-                  )
-                  .toList()
-                  .map((moviesItem) {
-                return HomeMovieItems(
-                  moviesItem: moviesItem,
-                );
-              }).toList(),
-            ),
-          ],
-        ),
-        */
