@@ -127,6 +127,7 @@ class _TabsScreenState extends State<TabsScreen> {
         },
       ];
     });
+
     return Scaffold(
       body: Column(children: [
         TopMenuNavigator(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 import './screen/tabs_screen.dart';
@@ -29,10 +30,15 @@ class MyMovieApp extends StatelessWidget {
           ),
         ),
       ),
-      home: SafeArea(
-        child: TabsScreen(
-          categoryModel: _categoryModel.list,
-          movies: _movies.list,
+      home: Container(
+        decoration: BoxDecoration(
+          color: Colors.grey[900],
+        ),
+        child: SafeArea(
+          child: TabsScreen(
+            categoryModel: _categoryModel.list,
+            movies: _movies.list,
+          ),
         ),
       ),
     );
