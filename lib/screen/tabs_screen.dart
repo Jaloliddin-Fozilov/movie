@@ -43,6 +43,10 @@ class _TabsScreenState extends State<TabsScreen> {
     });
   }
 
+  _deleteMovie(String id) {
+    moviesModel.deleteMovie(id);
+  }
+
   bool _isFavorite(String moviesId) {
     return moviesModel.favorites.any((movie) => movie.id == moviesId);
   }
@@ -101,7 +105,7 @@ class _TabsScreenState extends State<TabsScreen> {
         ),
         'title': "Favorites"
       },
-      {'page': ProfileScreen(), 'title': "Profile"},
+      {'page': ProfileScreen(deleteMovie: _deleteMovie), 'title': "Profile"},
       {
         'page': CategoryMoviesScreen(
           movies: widget.movies,

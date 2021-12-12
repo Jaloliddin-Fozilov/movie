@@ -187,4 +187,8 @@ class Movies {
       _favorites.removeWhere((movies) => movies.id == movieId);
     }
   }
+
+  void deleteMovie(String id) {
+    _list.removeWhere((movie) => movie.id == id);
+  }
 }

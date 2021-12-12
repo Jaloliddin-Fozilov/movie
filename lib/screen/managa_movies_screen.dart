@@ -3,16 +3,20 @@ import 'package:flutter/material.dart';
 import '../models/movies_model.dart';
 
 class ManageMoviesScreen extends StatelessWidget {
-  ManageMoviesScreen({Key? key}) : super(key: key);
+  final Function deleteMovie;
+  ManageMoviesScreen({
+    Key? key,
+    required this.deleteMovie,
+  }) : super(key: key);
 
-  var movies = Movies();
+  final movies = Movies();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.grey[800],
-          title: Text("Manage Movies"),
+          title: const Text("Manage Movies"),
           centerTitle: true,
         ),
         body: ListView.builder(
@@ -20,6 +24,11 @@ class ManageMoviesScreen extends StatelessWidget {
           itemBuilder: (ctx, index) => Card(
             color: Colors.grey[850],
             child: Dismissible(
+              onDismissed: (direction) {
+                deleteMovie(movies.list[index].id);
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    content: Text("${movies.list[index].title} o'chirildi")));
+              },
               direction: DismissDirection.endToStart,
               background: Container(
                 padding: EdgeInsets.only(right: 20),
@@ -30,7 +39,7 @@ class ManageMoviesScreen extends StatelessWidget {
                   color: Colors.white,
                 ),
               ),
-              key: ValueKey(key),
+              key: UniqueKey(),
               child: ListTile(
                 leading: CircleAvatar(
                   backgroundImage: NetworkImage(

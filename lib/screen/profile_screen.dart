@@ -2,10 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:movie/screen/managa_movies_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({Key? key}) : super(key: key);
+  final Function deleteMovie;
+  const ProfileScreen({
+    Key? key,
+    required this.deleteMovie,
+  }) : super(key: key);
 
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+bool adminCheck(String name, String surname) {
+  return name == "admin" && surname == "root";
 }
 
 String name = "Demo name";
@@ -31,7 +39,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   void _goToManageMoviesScreen(BuildContext context) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (ctx) => ManageMoviesScreen(),
+        builder: (ctx) => ManageMoviesScreen(deleteMovie: widget.deleteMovie),
       ),
     );
   }
@@ -117,10 +125,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   onPressed: () => _save(),
                   child: Text("Save"),
                 ),
-                ElevatedButton(
-                  onPressed: () => _goToManageMoviesScreen(context),
-                  child: Text("Manage movies"),
-                ),
+                adminCheck(name, surname)
+                    ? ElevatedButton(
+                        onPressed: () => _goToManageMoviesScreen(context),
+                        child: Text("Manage movies"),
+                      )
+                    : Text(
+                        "Manage moviesga kirish uchun ma'lumotlaringizni kiriting",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Colors.grey,
+                        ),
+                      ),
               ],
             ),
           ),
