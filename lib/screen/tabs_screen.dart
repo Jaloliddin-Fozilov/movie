@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movie/screen/managa_movies_screen.dart';
 
 import './home_page.dart';
 import './top_menu_navigator.dart';
@@ -79,54 +80,52 @@ class _TabsScreenState extends State<TabsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    setState(() {
-      categoryId;
-      _pages = [
-        {
-          'page': HomePage(
-            categoryModel: widget.categoryModel,
-            movies: widget.movies,
-            changeTab: changeTab,
-            categoryId: categoryId,
-            detailPage: detailPage,
-            toggleLike: _toggleLike,
-            isFavorite: _isFavorite,
-          ),
-          'title': "Home"
-        },
-        {
-          'page': FavoritesScreen(
-            movies: moviesModel.favorites,
-            toggleLike: _toggleLike,
-          ),
-          'title': "Favorites"
-        },
-        {'page': ProfileScreen(), 'title': "Profile"},
-        {
-          'page': CategoryMoviesScreen(
-            movies: widget.movies,
-            categoryId: categoryScreenId,
-            categoryTitleCaegotyScreen: categoryScreenTitle,
-            changeTab: changeTab,
-            detailPage: detailPage,
-          ),
-          'title': "Movies"
-        },
-        {
-          'page': MovieDetailScreen(
-            id: movieId,
-            title: title,
-            imageUrls: imageUrls,
-            description: description,
-            director: director,
-            actors: actors,
-            toggleLike: _toggleLike,
-            isFavorite: _isFavorite,
-          ),
-          'title': "Movie",
-        },
-      ];
-    });
+    categoryId;
+    _pages = [
+      {
+        'page': HomePage(
+          categoryModel: widget.categoryModel,
+          movies: widget.movies,
+          changeTab: changeTab,
+          categoryId: categoryId,
+          detailPage: detailPage,
+          toggleLike: _toggleLike,
+          isFavorite: _isFavorite,
+        ),
+        'title': "Home"
+      },
+      {
+        'page': FavoritesScreen(
+          movies: moviesModel.favorites,
+          toggleLike: _toggleLike,
+        ),
+        'title': "Favorites"
+      },
+      {'page': ProfileScreen(), 'title': "Profile"},
+      {
+        'page': CategoryMoviesScreen(
+          movies: widget.movies,
+          categoryId: categoryScreenId,
+          categoryTitleCaegotyScreen: categoryScreenTitle,
+          changeTab: changeTab,
+          detailPage: detailPage,
+        ),
+        'title': "Movies"
+      },
+      {
+        'page': MovieDetailScreen(
+          id: movieId,
+          title: title,
+          imageUrls: imageUrls,
+          description: description,
+          director: director,
+          actors: actors,
+          toggleLike: _toggleLike,
+          isFavorite: _isFavorite,
+        ),
+        'title': "Movie",
+      },
+    ];
 
     return Scaffold(
       body: Column(children: [
@@ -136,11 +135,11 @@ class _TabsScreenState extends State<TabsScreen> {
         ),
         _pages[_tabIndex]['page'],
       ]),
-      bottomNavigationBar: new Theme(
+      bottomNavigationBar: Theme(
         data: Theme.of(context).copyWith(
           canvasColor: Color.fromRGBO(20, 24, 33, 1),
         ),
-        child: new BottomNavigationBar(
+        child: BottomNavigationBar(
           unselectedItemColor: Colors.grey[700],
           selectedItemColor: Colors.blue,
           type: BottomNavigationBarType.shifting,
@@ -148,15 +147,15 @@ class _TabsScreenState extends State<TabsScreen> {
           onTap: changeTab,
           items: const [
             BottomNavigationBarItem(
-              icon: const Icon(Icons.home),
+              icon: Icon(Icons.home),
               label: "Home",
             ),
             BottomNavigationBarItem(
-              icon: const Icon(Icons.favorite),
+              icon: Icon(Icons.favorite),
               label: "Favorites",
             ),
             BottomNavigationBarItem(
-              icon: const Icon(Icons.person),
+              icon: Icon(Icons.person),
               label: "Profile",
             ),
           ],

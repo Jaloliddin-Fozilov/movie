@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movie/screen/managa_movies_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -25,6 +26,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
       surname = _surnameController.text;
       avatar = _avatarController.text;
     });
+  }
+
+  void _goToManageMoviesScreen(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (ctx) => ManageMoviesScreen(),
+      ),
+    );
   }
 
   @override
@@ -54,7 +63,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
           ),
           Container(
-            padding: EdgeInsets.symmetric(
+            padding: const EdgeInsets.symmetric(
               horizontal: 20,
             ),
             child: Column(
@@ -71,7 +80,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   controller: _nameController,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 TextField(
@@ -86,7 +95,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   controller: _surnameController,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 TextField(
@@ -101,12 +110,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   controller: _avatarController,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 ElevatedButton(
                   onPressed: () => _save(),
                   child: Text("Save"),
+                ),
+                ElevatedButton(
+                  onPressed: () => _goToManageMoviesScreen(context),
+                  child: Text("Manage movies"),
                 ),
               ],
             ),
