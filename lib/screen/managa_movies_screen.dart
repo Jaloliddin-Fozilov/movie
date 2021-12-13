@@ -2,13 +2,18 @@ import 'package:flutter/material.dart';
 
 import '../models/movies_model.dart';
 
-class ManageMoviesScreen extends StatelessWidget {
+class ManageMoviesScreen extends StatefulWidget {
   final Function deleteMovie;
   ManageMoviesScreen({
     Key? key,
     required this.deleteMovie,
   }) : super(key: key);
 
+  @override
+  State<ManageMoviesScreen> createState() => _ManageMoviesScreenState();
+}
+
+class _ManageMoviesScreenState extends State<ManageMoviesScreen> {
   final movies = Movies();
 
   @override
@@ -25,9 +30,14 @@ class ManageMoviesScreen extends StatelessWidget {
             color: Colors.grey[850],
             child: Dismissible(
               onDismissed: (direction) {
-                deleteMovie(movies.list[index].id);
-                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                    content: Text("${movies.list[index].title} o'chirildi")));
+                setState(() {
+                  widget.deleteMovie(movies.list[index].id);
+                });
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text("${movies.list[index].title} o'chirildi"),
+                  ),
+                );
               },
               direction: DismissDirection.endToStart,
               background: Container(

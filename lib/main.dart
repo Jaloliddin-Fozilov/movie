@@ -9,13 +9,26 @@ void main() {
   runApp(const MyMovieApp());
 }
 
-class MyMovieApp extends StatelessWidget {
+class MyMovieApp extends StatefulWidget {
   const MyMovieApp({Key? key}) : super(key: key);
 
   @override
+  State<MyMovieApp> createState() => _MyMovieAppState();
+}
+
+class _MyMovieAppState extends State<MyMovieApp> {
+  final _categoryModel = Categories();
+  final _movies = Movies();
+
+  void _deleteMovie(String id) {
+    setState(() {
+      _movies.deleteMovie(id);
+      print("main $id");
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final _categoryModel = Categories();
-    final _movies = Movies();
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
@@ -36,6 +49,7 @@ class MyMovieApp extends StatelessWidget {
           child: TabsScreen(
             categoryModel: _categoryModel.list,
             movies: _movies.list,
+            deleteMovie: _deleteMovie,
           ),
         ),
       ),

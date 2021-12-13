@@ -14,10 +14,12 @@ import '../models/movies_model.dart';
 class TabsScreen extends StatefulWidget {
   final List<CategoryModel> categoryModel;
   final List<MoviesModel> movies;
+  final Function deleteMovie;
   const TabsScreen({
     Key? key,
     required this.categoryModel,
     required this.movies,
+    required this.deleteMovie,
   }) : super(key: key);
 
   @override
@@ -41,10 +43,6 @@ class _TabsScreenState extends State<TabsScreen> {
     setState(() {
       moviesModel.toggleLike(movieId);
     });
-  }
-
-  _deleteMovie(String id) {
-    moviesModel.deleteMovie(id);
   }
 
   bool _isFavorite(String moviesId) {
@@ -105,7 +103,10 @@ class _TabsScreenState extends State<TabsScreen> {
         ),
         'title': "Favorites"
       },
-      {'page': ProfileScreen(deleteMovie: _deleteMovie), 'title': "Profile"},
+      {
+        'page': ProfileScreen(deleteMovie: widget.deleteMovie),
+        'title': "Profile"
+      },
       {
         'page': CategoryMoviesScreen(
           movies: widget.movies,
