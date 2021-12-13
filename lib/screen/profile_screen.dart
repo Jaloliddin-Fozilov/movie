@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:movie/models/movies_model.dart';
 import 'package:movie/screen/managa_movies_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   final Function deleteMovie;
+  final List<MoviesModel> movies;
   const ProfileScreen({
     Key? key,
     required this.deleteMovie,
+    required this.movies,
   }) : super(key: key);
 
   @override
@@ -39,7 +42,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
   void _goToManageMoviesScreen(BuildContext context) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (ctx) => ManageMoviesScreen(deleteMovie: widget.deleteMovie),
+        builder: (ctx) => ManageMoviesScreen(
+          deleteMovie: widget.deleteMovie,
+          movies: widget.movies,
+        ),
       ),
     );
   }

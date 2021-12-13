@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:movie/screen/managa_movies_screen.dart';
 
 import './home_page.dart';
 import './top_menu_navigator.dart';
@@ -13,13 +12,9 @@ import '../models/movies_model.dart';
 
 class TabsScreen extends StatefulWidget {
   final List<CategoryModel> categoryModel;
-  final List<MoviesModel> movies;
-  final Function deleteMovie;
   const TabsScreen({
     Key? key,
     required this.categoryModel,
-    required this.movies,
-    required this.deleteMovie,
   }) : super(key: key);
 
   @override
@@ -80,6 +75,12 @@ class _TabsScreenState extends State<TabsScreen> {
     });
   }
 
+  void _deleteMovie(String id) {
+    setState(() {
+      moviesModel.deleteMovie(id);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     categoryId;
@@ -87,7 +88,7 @@ class _TabsScreenState extends State<TabsScreen> {
       {
         'page': HomePage(
           categoryModel: widget.categoryModel,
-          movies: widget.movies,
+          movies: moviesModel.list,
           changeTab: changeTab,
           categoryId: categoryId,
           detailPage: detailPage,
@@ -104,12 +105,15 @@ class _TabsScreenState extends State<TabsScreen> {
         'title': "Favorites"
       },
       {
-        'page': ProfileScreen(deleteMovie: widget.deleteMovie),
+        'page': ProfileScreen(
+          deleteMovie: _deleteMovie,
+          movies: moviesModel.list,
+        ),
         'title': "Profile"
       },
       {
         'page': CategoryMoviesScreen(
-          movies: widget.movies,
+          movies: moviesModel.list,
           categoryId: categoryScreenId,
           categoryTitleCaegotyScreen: categoryScreenTitle,
           changeTab: changeTab,

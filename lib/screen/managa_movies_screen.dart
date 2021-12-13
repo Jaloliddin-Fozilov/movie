@@ -4,9 +4,11 @@ import '../models/movies_model.dart';
 
 class ManageMoviesScreen extends StatefulWidget {
   final Function deleteMovie;
+  final List<MoviesModel> movies;
   ManageMoviesScreen({
     Key? key,
     required this.deleteMovie,
+    required this.movies,
   }) : super(key: key);
 
   @override
@@ -14,8 +16,6 @@ class ManageMoviesScreen extends StatefulWidget {
 }
 
 class _ManageMoviesScreenState extends State<ManageMoviesScreen> {
-  final movies = Movies();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,17 +25,15 @@ class _ManageMoviesScreenState extends State<ManageMoviesScreen> {
           centerTitle: true,
         ),
         body: ListView.builder(
-          itemCount: movies.list.length,
+          itemCount: widget.movies.length,
           itemBuilder: (ctx, index) => Card(
             color: Colors.grey[850],
             child: Dismissible(
               onDismissed: (direction) {
-                setState(() {
-                  widget.deleteMovie(movies.list[index].id);
-                });
+                widget.deleteMovie(widget.movies[index].id);
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
-                    content: Text("${movies.list[index].title} o'chirildi"),
+                    content: Text("${widget.movies[index].title} o'chirildi"),
                   ),
                 );
               },
@@ -53,17 +51,17 @@ class _ManageMoviesScreenState extends State<ManageMoviesScreen> {
               child: ListTile(
                 leading: CircleAvatar(
                   backgroundImage: NetworkImage(
-                    movies.list[index].imageUrls[0],
+                    widget.movies[index].imageUrls[0],
                   ),
                 ),
                 title: Text(
-                  "${movies.list[index].title}",
+                  "${widget.movies[index].title}",
                   style: TextStyle(
                     color: Colors.white,
                   ),
                 ),
                 subtitle: Text(
-                  movies.list[index].director,
+                  widget.movies[index].director,
                   style: TextStyle(
                     color: Colors.white70,
                   ),

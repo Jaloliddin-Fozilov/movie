@@ -190,6 +190,6 @@ class Movies {
 
   void deleteMovie(String id) {
     _list.removeWhere((movie) => movie.id == id);
-    print("movies_models $id");
+    print("movies_model $id");
   }
 }

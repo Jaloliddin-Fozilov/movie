@@ -18,14 +18,6 @@ class MyMovieApp extends StatefulWidget {
 
 class _MyMovieAppState extends State<MyMovieApp> {
   final _categoryModel = Categories();
-  final _movies = Movies();
-
-  void _deleteMovie(String id) {
-    setState(() {
-      _movies.deleteMovie(id);
-      print("main $id");
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,8 +40,6 @@ class _MyMovieAppState extends State<MyMovieApp> {
         child: SafeArea(
           child: TabsScreen(
             categoryModel: _categoryModel.list,
-            movies: _movies.list,
-            deleteMovie: _deleteMovie,
           ),
         ),
       ),
