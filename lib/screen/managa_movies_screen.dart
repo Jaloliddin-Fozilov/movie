@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:movie/models/categories_model.dart';
 
 import '../models/movies_model.dart';
+import './add_movie.dart';
 
 class ManageMoviesScreen extends StatefulWidget {
   final Function deleteMovie;
   final List<MoviesModel> movies;
+  final List<CategoryModel> categories;
   ManageMoviesScreen({
     Key? key,
     required this.deleteMovie,
     required this.movies,
+    required this.categories,
   }) : super(key: key);
 
   @override
@@ -16,6 +20,16 @@ class ManageMoviesScreen extends StatefulWidget {
 }
 
 class _ManageMoviesScreenState extends State<ManageMoviesScreen> {
+  void _goToAddMovie(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (ctx) => AddMovie(
+          categories: widget.categories,
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,6 +37,12 @@ class _ManageMoviesScreenState extends State<ManageMoviesScreen> {
           backgroundColor: Colors.grey[800],
           title: const Text("Manage Movies"),
           centerTitle: true,
+          actions: [
+            IconButton(
+              onPressed: () => _goToAddMovie(context),
+              icon: Icon(Icons.add),
+            ),
+          ],
         ),
         body: ListView.builder(
           itemCount: widget.movies.length,
@@ -30,12 +50,12 @@ class _ManageMoviesScreenState extends State<ManageMoviesScreen> {
             color: Colors.grey[850],
             child: Dismissible(
               onDismissed: (direction) {
-                widget.deleteMovie(widget.movies[index].id);
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                     content: Text("${widget.movies[index].title} o'chirildi"),
                   ),
                 );
+                widget.deleteMovie(widget.movies[index].id);
               },
               direction: DismissDirection.endToStart,
               background: Container(

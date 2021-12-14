@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:movie/models/categories_model.dart';
 import 'package:movie/models/movies_model.dart';
 import 'package:movie/screen/managa_movies_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   final Function deleteMovie;
   final List<MoviesModel> movies;
+  final List<CategoryModel> categories;
   const ProfileScreen({
     Key? key,
     required this.deleteMovie,
     required this.movies,
+    required this.categories,
   }) : super(key: key);
 
   @override
@@ -45,6 +48,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         builder: (ctx) => ManageMoviesScreen(
           deleteMovie: widget.deleteMovie,
           movies: widget.movies,
+          categories: widget.categories,
         ),
       ),
     );
@@ -83,45 +87,72 @@ class _ProfileScreenState extends State<ProfileScreen> {
             child: Column(
               children: [
                 TextField(
+                  decoration: InputDecoration(
+                      labelText: name,
+                      labelStyle: TextStyle(
+                        color: Colors.white,
+                      ),
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Colors.white,
+                        ),
+                      ),
+                      focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                        color: Colors.white,
+                      ))),
                   style: TextStyle(
                     color: Colors.white,
                   ),
-                  decoration: InputDecoration(
-                    labelText: name,
-                    labelStyle: TextStyle(
-                      color: Colors.blue,
-                    ),
-                  ),
+                  cursorColor: Colors.white,
                   controller: _nameController,
                 ),
                 const SizedBox(
                   height: 10,
                 ),
                 TextField(
+                  decoration: InputDecoration(
+                      labelText: surname,
+                      labelStyle: TextStyle(
+                        color: Colors.white,
+                      ),
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Colors.white,
+                        ),
+                      ),
+                      focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                        color: Colors.white,
+                      ))),
                   style: TextStyle(
                     color: Colors.white,
                   ),
-                  decoration: InputDecoration(
-                    labelText: surname,
-                    labelStyle: TextStyle(
-                      color: Colors.blue,
-                    ),
-                  ),
+                  cursorColor: Colors.white,
                   controller: _surnameController,
                 ),
                 const SizedBox(
                   height: 10,
                 ),
                 TextField(
+                  decoration: const InputDecoration(
+                      labelText: "Profile image",
+                      labelStyle: TextStyle(
+                        color: Colors.white,
+                      ),
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Colors.white,
+                        ),
+                      ),
+                      focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                        color: Colors.white,
+                      ))),
                   style: TextStyle(
                     color: Colors.white,
                   ),
-                  decoration: const InputDecoration(
-                    labelText: "Profile image",
-                    labelStyle: TextStyle(
-                      color: Colors.blue,
-                    ),
-                  ),
+                  cursorColor: Colors.white,
                   controller: _avatarController,
                 ),
                 const SizedBox(

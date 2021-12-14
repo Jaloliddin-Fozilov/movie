@@ -108,6 +108,7 @@ class _TabsScreenState extends State<TabsScreen> {
         'page': ProfileScreen(
           deleteMovie: _deleteMovie,
           movies: moviesModel.list,
+          categories: widget.categoryModel,
         ),
         'title': "Profile"
       },
