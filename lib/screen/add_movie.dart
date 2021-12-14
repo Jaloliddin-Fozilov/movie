@@ -46,23 +46,22 @@ class _AddMovieState extends State<AddMovie> {
     final thirdImage = _thirdImageController.text;
   }
 
+  List<String> selectedActors = [];
   @override
   Widget build(BuildContext context) {
-    List<String> selectedActors = [];
-
     void addList(String actorId) {
       final actorIndex = selectedActors.indexWhere((actor) => actor == actorId);
       if (actorIndex < 0) {
-        selectedActors
-            .add(selectedActors.firstWhere((actors) => actors == actorId));
+        selectedActors.add(actorId);
       } else {
         selectedActors.removeWhere((actors) => actors == actorId);
       }
+      print(selectedActors);
     }
 
     bool checkActor(String actorId) {
       final check = selectedActors.indexWhere((actor) => actor == actorId);
-      return check < 0 ? true : false;
+      return check > -1 ? true : false;
     }
 
     return Scaffold(
