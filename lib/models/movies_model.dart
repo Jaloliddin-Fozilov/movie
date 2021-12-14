@@ -191,4 +191,9 @@ class Movies {
   void deleteMovie(String id) {
     _list.removeWhere((movie) => movie.id == id);
   }
+
+  void addMovie(MoviesModel movie) {
+    _list.add(movie);
+    print(movie);
+  }
 }

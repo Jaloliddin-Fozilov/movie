@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart' show timeDilation;
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 import 'package:movie/models/actors_model.dart';
 import 'package:movie/models/categories_model.dart';
+import 'package:movie/models/movies_model.dart';
+import 'package:movie/widgets/custom_image_input.dart';
 
 class AddMovie extends StatefulWidget {
   final List<CategoryModel> categories;
+  final Function addNewMovie;
   const AddMovie({
     Key? key,
     required this.categories,
+    required this.addNewMovie,
   }) : super(key: key);
 
   @override
@@ -19,11 +23,11 @@ class _AddMovieState extends State<AddMovie> {
   final _actorsModel = Actors();
 
   late String categoryId;
+  double movieRating = 3.0;
 
   final _titleController = TextEditingController();
   final _descriptionController = TextEditingController();
   final _directorController = TextEditingController();
-  final _actorsController = TextEditingController();
   final _mainImageController = TextEditingController();
   final _firstImageController = TextEditingController();
   final _secondImageController = TextEditingController();
@@ -39,11 +43,41 @@ class _AddMovieState extends State<AddMovie> {
     final title = _titleController.text;
     final description = _descriptionController.text;
     final director = _directorController.text;
-    final actors = _actorsController.text;
     final mainImage = _mainImageController.text;
     final firstImage = _firstImageController.text;
     final secondImage = _secondImageController.text;
     final thirdImage = _thirdImageController.text;
+
+    if (title.isEmpty ||
+        description.isEmpty ||
+        director.isEmpty ||
+        mainImage.isEmpty ||
+        firstImage.isEmpty ||
+        secondImage.isEmpty ||
+        thirdImage.isEmpty) {
+      return;
+    }
+    final List<String> imageUrls = [
+      mainImage,
+      firstImage,
+      secondImage,
+      thirdImage
+    ];
+
+    widget.addNewMovie(
+      MoviesModel(
+        id: UniqueKey().toString(),
+        categoryId: categoryId,
+        title: title,
+        imageUrls: imageUrls,
+        actors: selectedActors,
+        director: director,
+        description: description,
+        rating: movieRating,
+      ),
+    );
+
+    Navigator.of(context).pop(true);
   }
 
   List<String> selectedActors = [];
@@ -71,7 +105,7 @@ class _AddMovieState extends State<AddMovie> {
         centerTitle: true,
         actions: [
           IconButton(
-            onPressed: _save,
+            onPressed: () => _save(),
             icon: Icon(Icons.check),
           ),
         ],
@@ -209,6 +243,37 @@ class _AddMovieState extends State<AddMovie> {
                         .toList(),
                   ),
                 ),
+              ),
+              CustomImageInput(
+                imageController: _mainImageController,
+                label: 'Asosiy rasm linkini kiriting!',
+              ),
+              CustomImageInput(
+                imageController: _firstImageController,
+                label: 'Rasm 1 linkini kiriting!',
+              ),
+              CustomImageInput(
+                imageController: _secondImageController,
+                label: 'Rasm 2 linkini kiriting!',
+              ),
+              CustomImageInput(
+                imageController: _thirdImageController,
+                label: 'Rasm 3 linkini kiriting!',
+              ),
+              RatingBar.builder(
+                initialRating: 3,
+                minRating: 1,
+                direction: Axis.horizontal,
+                allowHalfRating: true,
+                itemCount: 5,
+                itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
+                itemBuilder: (context, _) => Icon(
+                  Icons.star,
+                  color: Colors.amber,
+                ),
+                onRatingUpdate: (rating) {
+                  movieRating = rating;
+                },
               ),
             ],
           ),

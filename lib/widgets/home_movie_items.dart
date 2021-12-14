@@ -3,8 +3,6 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 import 'package:movie/models/movies_model.dart';
 
-import '../screen/tabs_screen.dart';
-
 class HomeMovieItems extends StatelessWidget {
   final MoviesModel moviesItem;
   final Function? changeTab;

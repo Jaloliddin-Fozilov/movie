@@ -81,6 +81,10 @@ class _TabsScreenState extends State<TabsScreen> {
     });
   }
 
+  void _addNewMovie(MoviesModel movie) {
+    moviesModel.addMovie(movie);
+  }
+
   @override
   Widget build(BuildContext context) {
     categoryId;
@@ -109,6 +113,7 @@ class _TabsScreenState extends State<TabsScreen> {
           deleteMovie: _deleteMovie,
           movies: moviesModel.list,
           categories: widget.categoryModel,
+          addNewMovie: _addNewMovie,
         ),
         'title': "Profile"
       },

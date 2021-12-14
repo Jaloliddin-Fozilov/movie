@@ -8,11 +8,13 @@ class ManageMoviesScreen extends StatefulWidget {
   final Function deleteMovie;
   final List<MoviesModel> movies;
   final List<CategoryModel> categories;
+  final Function addNewMovie;
   ManageMoviesScreen({
     Key? key,
     required this.deleteMovie,
     required this.movies,
     required this.categories,
+    required this.addNewMovie,
   }) : super(key: key);
 
   @override
@@ -25,6 +27,7 @@ class _ManageMoviesScreenState extends State<ManageMoviesScreen> {
       MaterialPageRoute(
         builder: (ctx) => AddMovie(
           categories: widget.categories,
+          addNewMovie: widget.addNewMovie,
         ),
       ),
     );
@@ -86,15 +89,17 @@ class _ManageMoviesScreenState extends State<ManageMoviesScreen> {
                     color: Colors.white70,
                   ),
                 ),
-                trailing: Column(children: [
-                  IconButton(
-                    onPressed: () {},
-                    icon: Icon(
-                      Icons.edit,
-                      color: Colors.white,
+                trailing: Column(
+                  children: [
+                    IconButton(
+                      onPressed: () {},
+                      icon: Icon(
+                        Icons.edit,
+                        color: Colors.white,
+                      ),
                     ),
-                  ),
-                ]),
+                  ],
+                ),
               ),
             ),
           ),

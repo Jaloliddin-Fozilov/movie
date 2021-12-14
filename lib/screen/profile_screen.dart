@@ -7,11 +7,13 @@ class ProfileScreen extends StatefulWidget {
   final Function deleteMovie;
   final List<MoviesModel> movies;
   final List<CategoryModel> categories;
+  final Function addNewMovie;
   const ProfileScreen({
     Key? key,
     required this.deleteMovie,
     required this.movies,
     required this.categories,
+    required this.addNewMovie,
   }) : super(key: key);
 
   @override
@@ -49,6 +51,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           deleteMovie: widget.deleteMovie,
           movies: widget.movies,
           categories: widget.categories,
+          addNewMovie: widget.addNewMovie,
         ),
       ),
     );
