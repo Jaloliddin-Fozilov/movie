@@ -23,14 +23,20 @@ class ManageMoviesScreen extends StatefulWidget {
 
 class _ManageMoviesScreenState extends State<ManageMoviesScreen> {
   void _goToAddMovie(BuildContext context) {
-    Navigator.of(context).push(
+    Navigator.of(context)
+        .push(
       MaterialPageRoute(
         builder: (ctx) => AddMovie(
           categories: widget.categories,
           addNewMovie: widget.addNewMovie,
         ),
       ),
-    );
+    )
+        .then((value) {
+      if (value != null) {
+        setState(() {});
+      }
+    });
   }
 
   @override
